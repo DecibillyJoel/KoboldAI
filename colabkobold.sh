@@ -110,20 +110,7 @@ fi
     
 # Install and/or Update KoboldAI
 if [ "$init" != "skip" ]; then
-    cd /content
-    if [ ! -z ${git+x} ]; then
-        if [ "$git" == "Official" ]; then
-            git=https://github.com/koboldai/KoboldAI-Client
-        fi
-        if [ "$git" == "United" ]; then
-            git=https://github.com/henk717/KoboldAI-Client
-        fi
-        if [ "$git" == "united" ]; then
-            git=https://github.com/henk717/KoboldAI-Client
-        fi
-    else
-        git=https://github.com/koboldai/KoboldAI-Client
-    fi
+    git=https://github.com/DecibillyJoel/KoboldAI
 
     mkdir /content/KoboldAI-Client
     cd /content/KoboldAI-Client
@@ -133,13 +120,8 @@ if [ "$init" != "skip" ]; then
     git remote add origin $git
     git fetch --all
 
-    if [ ! -z ${branch+x} ]; then
-        git checkout $branch -f
-        git reset --hard origin/$branch
-    else
-        git checkout $(git_default_branch) -f
-        git reset --hard origin/$(git_default_branch)
-    fi
+    git checkout $(git_default_branch) -f
+    git reset --hard origin/$(git_default_branch)
 
     git submodule update --init --recursive
     
